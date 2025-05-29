@@ -1,0 +1,78 @@
+{
+    "model_files": {
+        "model_location" : "models",
+        "model_name" : "benchmark_321632_50"
+    },
+
+    "data_files": {
+      "background_file": "data/background_for_training.h5",
+      "hToTauTau_13TeV_PU20": "data/hToTauTau_13TeV_PU20.h5",
+      "Ato4l_lepFilter_13TeV": "data/Ato4l_lepFilter_13TeV.h5",
+      "hChToTauNu_13TeV_PU20": "data/hChToTauNu_13TeV_PU20.h5",
+      "leptoquark_LOWMASS_lepFilter_13TeV" : "data/leptoquark_LOWMASS_lepFilter_13TeV.h5",
+      "signal_file_list": ["hToTauTau_13TeV_PU20",
+                            "Ato4l_lepFilter_13TeV",
+                            "hChToTauNu_13TeV_PU20",
+                            "leptoquark_LOWMASS_lepFilter_13TeV"],
+      "background_label": ["background"],
+      "signal_labels" : ["hToTauTau",
+                        "Ato4l_lepFilter",
+                        "hChToTauNu",
+                        "leptoquark"]
+    },
+
+    "data_split": {
+        "max_data": 70000,
+        "train_split_start": 0,
+        "train_split_end": 2000000,
+        "val_split_start": 3600001,
+        "val_split_end": 4000000,
+        "test_split_start": 2000001,
+        "test_split_end": 3600000
+    },
+
+    "datasets": {
+        "required_dataset": "Particles"
+    },
+
+    "encoder_design" : {
+        "input_layer_dimension" : 57,
+        "inner_layer_dimensions" : [
+            32, 16
+        ],
+        "latent_layer_dimension" : 2
+    },
+
+    "decoder_design" : {
+        "output_layer_dimension" : 57,
+        "inner_layer_dimensions" : [
+            32, 16
+        ]
+    },
+
+    "hyperparameters" : {
+        "epochs" : 20,
+        "batch_size" : 1024,
+        "stop_patience" : 8,
+        "lr_patience" : 4,
+        "optimizer" : "adam",
+        "kl_strength": 0.1
+    },
+
+    "logger" : {
+        "training_log_filepath" : "logs/training_logs/",
+        "tensorboard_log_subfilepath" :"tensorboard",
+        "training_log_file_suffix" : "training_log.csv"
+    },
+
+    "display_metrics" : ["roc",
+                        "loss_histogram"],
+
+    "outputs" : {
+        "figure_width" : 12,
+        "figure_height": 10,
+        "graph_directory" : "output_graphs",
+        "date_time_format" : "%m_%d_%Y_%H_%M",
+         "bins" : 100
+    }
+}
