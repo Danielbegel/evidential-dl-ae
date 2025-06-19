@@ -4,9 +4,9 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, CSVLogg
 from tensorflow.keras.optimizers import Adam
 
 
-def train_model(train_config, model, data_train, data_val, model_type='ae'):
-    if model_type == 'ae' or model_type == 'VAE' or model_type == 'UVAE' or model_type == 'EDL':
-        return train_model_generic(train_config, model, data_train, data_val)
+def train_model(train_config, model, data_train, data_val, model_type='AE'):
+    if model_type == 'AE' or model_type == 'VAE' or model_type == 'EDL':
+        return train_model_generic(train_config, model_type, model, data_train, data_val)
     # Temp
     if model_type == 'Custom_Classification_Model':
         return train_model_classification(train_config, model, data_train, data_val)
@@ -25,10 +25,14 @@ def train_model_generic(train_config, model, data_train, data_val):
     early_stopping = EarlyStopping(patience=train_config["hyperparameters"]["stop_patience"], restore_best_weights=True)
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1,
                                   patience=train_config["hyperparameters"]["lr_patience"], verbose=1)
-    if train_config["hyperparameters"]["optimizer"] == 'adam':
-        model.compile(optimizer=Adam())
+    if model_type == 'AE':
+        model.compile(optimizer=Adam(), loss=tf.keras.losses.MeanSquaredError())
+    elif model_type == 'EDL':
+        print('TODO EDL')
+        #TODO 
+        #model.compile(optimizer=Adam(), loss=tf.keras.losses.MeanSquaredError())
     else:
-        model.comple()
+        model.compile()
     history = model.fit(x=data_train,
                         y=data_train,
                         validation_data=(data_val, data_val),

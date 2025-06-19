@@ -26,7 +26,7 @@ data_train, data_validate = fs.generate_fixed_trainingdata_split(train_config, p
 # Create Model
 print("Creating Model")
 model = model_generator.create_model(train_config, 'AE')
-#model = model_generator.create_model(train_config, 'DAE')
+#model = model_generator.create_model(train_config, 'EDL')
 
 # Train the Model
 print("Training Model")

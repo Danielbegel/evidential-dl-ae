@@ -1,6 +1,6 @@
 from model_manager.ae_model_generator import AeModel
-from model_manager.vae_model_generator import VaeModel
 from model_manager.edl_model_generator import EDLModel
+#from model_manager.vae_model_generator import VaeModel
 
 def create_model(train_config, model_type):
     """
@@ -9,7 +9,8 @@ def create_model(train_config, model_type):
     """
     if model_type == "AE":
         return AeModel(train_config)
-    if model_type == "VAE":
-        return VaeModel(train_config)
-    if model_type == "DAE":
+    if model_type == "EDL":
         return EDLModel(train_config)
+    #if model_type == "VAE":
+    #    return VaeModel(train_config)
+
