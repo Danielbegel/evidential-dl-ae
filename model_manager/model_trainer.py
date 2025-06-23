@@ -12,7 +12,7 @@ def train_model(train_config, model, data_train, data_val, model_type='AE'):
         return train_model_classification(train_config, model, data_train, data_val)
 
 
-def train_model_generic(train_config, model, data_train, data_val):
+def train_model_generic(train_config, model_type, model, data_train, data_val):
     """
     This function trains the models and logs the training process. The details for training can also be viewed in tensorboard
     """

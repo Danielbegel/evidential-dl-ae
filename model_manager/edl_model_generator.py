@@ -2,12 +2,11 @@ from tensorflow.keras import Model
 from tensorflow.keras import layers
 import tensorflow as tf
 import tensorflow_probability as tfp
-from model_evaluation import loss_calculator
 
 
 class EDLModel(Model):
     """
-    This model replaces the existing VAe parameters with the Dirichlet Paramaters
+    This model replaces the VAE parameters with the Dirichlet Paramaters
 
     """
     def __init__(self, train_config):
@@ -40,7 +39,7 @@ class EDLModel(Model):
 
     def call(self, inputs):
         alpha, z = self.encoder(inputs)
-        kl_loss = loss_calculator.get_dvae_kl_loss(alpha)
+        kl_loss = tf.reduce_sum(tfp.distributions.Dirichlet(alpha).kl_divergence(tfp.distributions.Dirichlet(prior_alpha))) #TODO debug 
         strength = self.train_config["hyperparameters"]["kl_strength"]
         reconstructed = self.decoder(z)
         mse = tf.keras.losses.MeanSquaredError()
