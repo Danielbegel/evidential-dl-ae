@@ -38,6 +38,9 @@ class EDLModel(Model):
         self.decoder = Model(self.decoder_input, self.decoder_output)
 
     def call(self, inputs):
+        # DEBUGGING
+        # prior_alpha = 0.1
+        prior_alpha = tf.fill(dims=(self.latent_dim,), value=0.1) # DEBUGGING       
         alpha, z = self.encoder(inputs)
         kl_loss = tf.reduce_sum(tfp.distributions.Dirichlet(alpha).kl_divergence(tfp.distributions.Dirichlet(prior_alpha))) #TODO debug 
         strength = self.train_config["hyperparameters"]["kl_strength"]
@@ -48,6 +51,11 @@ class EDLModel(Model):
         total_loss = reconstruction_loss + strength * kl_loss
         self.add_loss(total_loss)
         return reconstructed
+    
+       
+
+        
+
 
 
 class Sampling(layers.Layer):

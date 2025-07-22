@@ -13,7 +13,7 @@ import numpy as np
 from sklearn.metrics import auc
 
 print("Initializing Configuration for Training...")
-TRAINER_CONFIG_FILE = 'config/trainer_config_v1.1.json'
+TRAINER_CONFIG_FILE = 'config/trainer_config_v1.0.json'
 model_type = "EDL"
 
 # Initialize the Config here
@@ -35,6 +35,7 @@ print("Creating Model")
 edl_model = model_generator.create_model(train_config, model_type)
 
 # Train Model
+print("Training Model")
 trained_model, history = model_trainer.train_model(train_config, edl_model, data_train, data_validate, model_type)
 
 # Evaluate Model
