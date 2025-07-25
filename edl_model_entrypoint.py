@@ -2,11 +2,11 @@
 
 # Imports
 import json
-from data_splitter import fixed_splitter as fs
-from data_preprocessor import data_preprocessor as preproc
+from data_manager import fixed_splitter as fs
+from config.data_manager import data_preprocessor as preproc
 from model_manager import model_trainer, model_generator
 from model_evaluation import model_evaluator
-from data_preprocessor import data_preprocessor
+from config.data_manager import data_preprocessor
 from model_evaluation import loss_calculator
 from grapher import latent_space_graph_generator
 import numpy as np

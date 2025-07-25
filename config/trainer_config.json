@@ -22,7 +22,7 @@
     },
 
     "data_split": {
-        "max_data": 70000,
+        "max_data": 50000,
         "train_split_start": 0,
         "train_split_end": 2000000,
         "val_split_start": 3600001,
@@ -51,7 +51,7 @@
     },
 
     "hyperparameters" : {
-        "epochs" : 5,
+        "epochs" : 20,
         "batch_size" : 1024,
         "stop_patience" : 8,
         "lr_patience" : 4,

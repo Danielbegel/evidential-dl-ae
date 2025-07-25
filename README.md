@@ -12,12 +12,17 @@ Contains .json files that include model dimension, number of layers, hyperparame
 ### `model_manager`
 Contains model infrastructure to create new AE, VAE, or EDL models, based on training .json. Also includes content to evaluate models after training.
 
-### `plotter`
+### `grapher`
 Make standard plots.
 
 ## Getting Started
 0. Requirements (make a conda env): python 3.5+, h5py, tensorflow, tensorflow_probability, tf_keras
-1. Download the datasets from Zenodo (https://zenodo.org/records/5046389) and copy to `data/` directory.
+1. Download the datasets from Zenodo and copy to `data/` directory.
+    a. background: https://zenodo.org/records/5046389
+    b. A -> 4 lepton: https://zenodo.org/records/5046446
+    c. h -> tau tau: https://zenodo.org/records/5061633
+    d. h+ -> tau nu: https://zenodo.org/records/5061688
+    f. LQ -> b tau: https://zenodo.org/records/5055454
 2. Run the `train_entrypoint.py` script, modifying the script to specify your train config file ("TRAINER_CONFIG_FILE") and desired model type ("Create Model")
 3. 
 

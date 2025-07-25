@@ -2,8 +2,8 @@
 
 # Imports
 import json
-from data_splitter import fixed_splitter as fs
-from data_preprocessor import data_preprocessor as preproc
+from data_manager import fixed_splitter as fs
+from config.data_manager import data_preprocessor as preproc
 from model_manager import model_trainer, model_generator, model_storage, model_evaluation
 from grapher import loss_graph_generator
 

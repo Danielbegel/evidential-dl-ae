@@ -7,18 +7,20 @@ import tensorflow as tf
 import keras
 
 
-def generate_loss_vs_epoch(train_config, history):
+def generate_loss_vs_epoch(train_config, history, model_type):
     loss = history.history["loss"]
     val_loss = history.history["val_loss"]
     plt.xlabel('Epoch')
-    plt.ylabel('Loss (MSE)')
+    plt.ylabel('Loss (MSE) (Log)')
     plt.title("Loss vs epoch curve for " + train_config["model_files"]["model_name"])
     plt.xticks(np.arange(0,21,2))
     plt.plot(np.linspace(0, train_config["hyperparameters"]["epochs"], train_config["hyperparameters"]["epochs"]), loss)
     plt.plot(np.linspace(0, train_config["hyperparameters"]["epochs"], train_config["hyperparameters"]["epochs"]), val_loss)
-
+    if model_type == 'EDL' or model_type =='VAE':
+        plt.yscale('log')
+    plt.legend(loc='upper right')
     plt.savefig(os.path.join(train_config["outputs"]["graph_directory"], datetime.datetime.now().strftime(
-        train_config["outputs"]["date_time_format"]) + "_LossVsEpoch.png"), format="png", bbox_inches="tight")
+        train_config["outputs"]["date_time_format"]) + "_" + model_type + "_LossVsEpoch.png"), format="png", bbox_inches="tight")
     plt.show()
 
 
