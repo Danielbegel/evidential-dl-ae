@@ -3,7 +3,6 @@ from tensorflow.keras import layers
 import tensorflow as tf
 import tensorflow_probability as tfp
 
-
 class EDLModel(Model):
     """
     This model replaces the VAE parameters with the Dirichlet Paramaters
@@ -37,11 +36,12 @@ class EDLModel(Model):
         self.encoder = Model(self.encoder_input, [self.z, self.alpha])
         self.decoder = Model(self.decoder_input, self.decoder_output)
 
+        self.num_classes = train_config["encoder_design"]["latent_layer_dimension"]
+        self.prior_alpha = tf.constant([1.0] * self.num_classes, dtype=tf.float32)
+
     def call(self, inputs):
-        # DEBUGGING
-        # prior_alpha = 0.1
-        prior_alpha = tf.fill(dims=(self.latent_dim,), value=0.1) # DEBUGGING       
         alpha, z = self.encoder(inputs)
+        prior_alpha = tf.broadcast_to(self.prior_alpha, tf.shape(alpha))
         kl_loss = tf.reduce_sum(tfp.distributions.Dirichlet(alpha).kl_divergence(tfp.distributions.Dirichlet(prior_alpha))) #TODO debug 
         strength = self.train_config["hyperparameters"]["kl_strength"]
         reconstructed = self.decoder(z)
@@ -51,11 +51,6 @@ class EDLModel(Model):
         total_loss = reconstruction_loss + strength * kl_loss
         self.add_loss(total_loss)
         return reconstructed
-    
-       
-
-        
-
 
 
 class Sampling(layers.Layer):
@@ -63,3 +58,9 @@ class Sampling(layers.Layer):
 
     def call(self, inputs):
         return tfp.distributions.Dirichlet(inputs).sample()
+
+
+    
+    
+
+

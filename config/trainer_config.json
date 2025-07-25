@@ -1,7 +1,7 @@
 {
     "model_files": {
         "model_location" : "models",
-        "model_name" : "benchmark_32163"
+        "model_name" : "benchmark_32162"
     },
 
     "data_files": {
@@ -40,7 +40,7 @@
         "inner_layer_dimensions" : [
             32, 16
         ],
-        "latent_layer_dimension" : 3
+        "latent_layer_dimension" : 2
     },
 
     "decoder_design" : {
@@ -51,7 +51,7 @@
     },
 
     "hyperparameters" : {
-        "epochs" : 20,
+        "epochs" : 5,
         "batch_size" : 1024,
         "stop_patience" : 8,
         "lr_patience" : 4,
@@ -74,6 +74,6 @@
         "figure_height": 10,
         "graph_directory" : "plots",
         "date_time_format" : "%m_%d_%Y_%H_%M",
-         "bins" : 100
+        "bins" : 100
     }
 }

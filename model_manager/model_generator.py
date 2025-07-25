@@ -10,6 +10,7 @@ def create_model(train_config, model_type):
     if model_type == "AE":
         return AeModel(train_config)
     elif model_type == "EDL":
+        print("creating EDL model...")
         return EDLModel(train_config)
     # elif model_type == "VAE":
     #     return EDLModel(train_config)
