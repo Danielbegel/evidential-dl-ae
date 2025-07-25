@@ -41,3 +41,9 @@ def generate_roc_curve(train_config, truth_values, scores ):
     plt.savefig(os.path.join(train_config["outputs"]["graph_directory"], datetime.datetime.now().strftime(
         train_config["outputs"]["date_time_format"]) + "_ROC.png"), format="png", bbox_inches="tight")
     plt.show()
+
+# OLD METHOD FOR AUC
+# def get_reconstruction_losses(model, data):
+#     reconstructed = model(data)
+#     errors = tf.reduce_mean(tf.math.squared_difference(data, reconstructed), axis=1)
+#     return errors.numpy()
