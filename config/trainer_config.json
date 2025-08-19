@@ -1,7 +1,8 @@
 {
     "model_files": {
         "model_location" : "models",
-        "model_name" : "benchmark_32162"
+        "model_name" : "benchmark_32162",
+        "model_type" : "EDL"
     },
 
     "data_files": {
@@ -51,12 +52,12 @@
     },
 
     "hyperparameters" : {
-        "epochs" : 20,
+        "epochs" : 3,
         "batch_size" : 1024,
         "stop_patience" : 8,
         "lr_patience" : 4,
         "optimizer" : "adam",
-        "kl_strength": 0.1
+        "kl_annealing": 1
     },
 
     "logger" : {
